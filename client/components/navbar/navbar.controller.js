@@ -3,8 +3,17 @@
 angular.module('ursaMajorApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'Home',
+      'title': 'Homepage',
       'link': '/'
+    }, {
+        'title': 'Submit a URS Submission',
+        'link': '/'
+    }, {
+        'title': 'Submission List',
+        'link': '/'
+    },{
+        'title': 'Account Information',
+        'link': '/'
     }];
 
     $scope.isCollapsed = true;
