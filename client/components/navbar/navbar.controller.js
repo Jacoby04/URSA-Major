@@ -7,13 +7,13 @@ angular.module('ursaMajorApp')
       'link': '/'
     }, {
         'title': 'Submit a URS Submission',
-        'link': '/'
+        'link': '/submission'
     }, {
         'title': 'Submission List',
-        'link': '/'
+        'link': '/subList'
     },{
         'title': 'Account Information',
-        'link': '/'
+        'link': '/accountInfo'
     }];
 
     $scope.isCollapsed = true;
