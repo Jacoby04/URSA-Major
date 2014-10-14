@@ -11,4 +11,5 @@ var UserinfoSchema = new Schema({
   userTShirtSize: String
 });
 
+
 module.exports = mongoose.model('Userinfo', UserinfoSchema);
