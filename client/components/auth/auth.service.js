@@ -107,7 +107,16 @@ angular.module('ursaMajorApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
+         var myEmail = "saxxx027@morris.umn.edu.com"; //don't know how to actually access the email, but rest works
+         console.log(myEmail.indexOf("morris.umn.edu"));
+         if(myEmail.indexOf("morris.umn.edu") != -1){
+             return true;
+
+         } else {
+             return false;
+         }
+
+          //what does work: return currentUser.hasOwnProperty('role');
       },
 
       /**

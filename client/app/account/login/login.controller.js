@@ -23,6 +23,8 @@ angular.module('ursaMajorApp')
       }
     };
 
+
+
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
