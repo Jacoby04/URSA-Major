@@ -19,18 +19,18 @@
             $.getJSON("https://spreadsheets.google.com/feeds/list/1VH6bDj7m04P9AI5WmgKYfdfXAZYRbVFiSRPJ3r_bou4/od6/public/values?alt=json-in-script&callback=?",
                     function (data) {
                         $('div#sub-list').append('<ul class="subs"></ul>');
+                        $('.subs').append('<hr>' + "Name:".bold() + "" + "Email:".bold() + "" + "awesome:".bold() + '</hr></br>');
                         $.each(data.feed.entry, function(i, entry) {
                             var sub = '<span style="display:none">' + entry.id.$t + '</span>';
-                            var entryUserName = entry.gsx$username.$t;
-                            document.getElementById("userNameForSubmission").innerHTML = entryUserName;
-                            var entryName = entry.gsx$yourname.$t;
-                            document.getElementById("nameForSubmission").innerHTML = entryName;
-                            var isAwesome = entry.gsx$areyouawesome.$t;
-                            document.getElementById("awesome").innerHTML = isAwesome;
-                            sub += entry.gsx$username.$t;
+                            var email = entry.gsx$username.$t;
+//                            document.getElementById("userNameForSubmission").innerHTML = email;
+                            var name = entry.gsx$yourname.$t;
+//                            document.getElementById("nameForSubmission").innerHTML = name;
+                            var awesome = entry.gsx$areyouawesome.$t;
+//                            document.getElementById("awesome").innerHTML = awesome;
                             sub += entry.gsx$yourname.$t;
-                            sub += entry.gsx$areyouawesome.$t;
                             $('.subs').append('<hr>' + sub + '</span></hr>');
+
 
                         });
                     });
@@ -43,11 +43,7 @@
 
 <body>
     <div id="sub-list">
-        <table>
-            <li id="userNameForSubmission"></li>
-            <li id="nameForSubmission"></li>
-            <li id="awesome"></li>
-        </table>
+
     </div>
 </body>
 
