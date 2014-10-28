@@ -2,7 +2,6 @@
 
 angular.module('ursaMajorApp')
     .controller('SublistCtrl', function ($scope) {
-        $scope.message = 'Hello';
 
         $scope.subs = {sub:[{
             name:"",
