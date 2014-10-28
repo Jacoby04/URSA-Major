@@ -7,42 +7,48 @@
 </header>
 
 <h1>URS Submission List</h1>
-<div>
-    There have not been submitted URS submissions yet.
-</div>
-
-<h1>Example Form Submission List</h1>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $(function listStuff() {
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1VH6bDj7m04P9AI5WmgKYfdfXAZYRbVFiSRPJ3r_bou4/od6/public/values?alt=json-in-script&callback=?",
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1ImSQ0fy65Bc9NjmgHrpruaDrodC2uJ1n4RYl2OTX9Po/od6/public/values?alt=json-in-script&callback=?",
                     function (data) {
                         $('div#sub-list').append('<ul class="subs"></ul>');
                         $.each(data.feed.entry, function(i, entry) {
-                            var name = '<span style="display:none">' + entry.id.$t + '</span>';
-                            var email = '<span style="display:none">' + entry.id.$t + '</span>';
-                            var awesome = '<span style="display:none">' + entry.id.$t + '</span>';
-                            var homework = '<span style="display:none">' + entry.id.$t + '</span>';
-                            var writingutensil = '<span style="display:none">' + entry.id.$t + '</span>';
-                            var whyawesome = '<span style="display:none">' + entry.id.$t + '</span>';
-                            name += entry.gsx$yourname.$t;
-                            email += entry.gsx$username.$t;
-                            awesome += entry.gsx$areyouawesome.$t;
-                            homework += entry.gsx$doyoulikedoinghomework.$t;
-                            writingutensil += entry.gsx$whatisyourfavoritewritingutensil.$t;
-                            whyawesome += entry.gsx$whyareyouawesome.$t;
+                            var timestamp = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var adviserApproval = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var adviser = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var adviserEmail = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var title = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var studentNamefirst = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var studentNamelast = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var studentEmail = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var academicDiscipline = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var type = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var abstract = '<span style="display:none">' + entry.id.$t + '</span>';
+                            timestamp += entry.gsx$timestamp.$t;
+                            adviserApproval += entry.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t;
+                            adviser += entry.gsx$facultysponsorprojectadviser.$t;
+                            adviserEmail += entry.gsx$facultysponsorprojectadviseremail.$t;
+                            title += entry.gsx$title.$t;
+                            studentNamefirst += entry.gsx$firstnameprimarystudentpresentercontactperson.$t;
+                            studentNamelast += entry.gsx$lastnameprimarystudentpresentercontactperson.$t;
+                            studentEmail += entry.gsx$username.$t;
+                            academicDiscipline += entry.gsx$academicdiscplineforproject.$t;
+                            type += entry.gsx$typeofpresentation.$t;
+                            abstract += entry.gsx$artiststatementproposalabstract1000characterlimitapprox250words.$t;
                             $('.subs').append('<hr>' +
-                                    "Name: ".bold() + name + '<hr>' +
-                                    "Email: ".bold() + email + '<hr>' +
-                                    "Do you like doing homework?: ".bold() + '<br>' + homework + '<hr>' +
-                                    "What is your favorite writing utensil?: ".bold() + writingutensil + '<hr>' +
-                                    "Are you awesome?: ".bold() + '<br>' + awesome + '<hr>' +
-                                    "Why are you awesome?: ".bold() + '<br>' + whyawesome + '</span></hr></br><div class="hrStyle"><hr></div>');
-
+                                    "Title: ".bold() + title + '<hr>' +
+                                    "Primary Student Name: ".bold() + studentNamefirst + " " + studentNamelast + ", " + studentEmail + '<hr>' +
+                                    "Academic Discipline: ".bold() + academicDiscipline + '<hr>' +
+                                    "Type of Project: ".bold() + type + '<hr>' +
+                                    "Statement/Proposal/Abstract: ".bold() + '<br>' + abstract + '<hr>' +
+                                    "Date Submitted: ".bold() + timestamp + '<hr>' +
+                                    "Faculty Adviser: ".bold() + adviser + ", " + adviserEmail+ '<hr>' +
+                                    "Adviser Approval: ".bold() + adviserApproval +
+                                    '</span></hr></br><div class="hrStyle"><hr></div>');
                         });
                     });
-
         });
     });
 
@@ -50,19 +56,5 @@
 
 
 <body>
-    <div id="sub-list">
-
-    </div>
+    <div id="sub-list"></div>
 </body>
-
-    <!--<iframe src="https://docs.google.com/spreadsheets/d/11UhreZn8ZcrZ1LSWJz2s1PWEdHcjhuNkVn7w_yPfTFc/pubhtml?alt=json-in-script&callback=?widget=true&amp;headers=false" height="100%" width="100%"></iframe>-->
-
-        <!---->
-        <!---->
-
-<!--<form><input type="button" value="Click this" onClick="window.location.href='https://docs.google.com/spreadsheets/d/11UhreZn8ZcrZ1LSWJz2s1PWEdHcjhuNkVn7w_yPfTFc/pubhtml?widget=true&amp;headers=false'"></form>-->
-
-<!--<div>
-    {{load.sheetReady.receive.rows}}
-
-</div> -->
