@@ -19,7 +19,7 @@
             $.getJSON("https://spreadsheets.google.com/feeds/list/1VH6bDj7m04P9AI5WmgKYfdfXAZYRbVFiSRPJ3r_bou4/od6/public/values?alt=json-in-script&callback=?",
                     function (data) {
                         $('div#sub-list').append('<ul class="subs"></ul>');
-                        $('.subs').append('<hr>' + "Name:".bold() + "" + "Email:".bold() + "" + "awesome:".bold() + '</hr></br>');
+                        $('.subs').append('<hr>' + "Name:".bold() +  + "Email:".bold() + "" + "awesome:".bold() + '</hr></br>');
                         $.each(data.feed.entry, function(i, entry) {
                             var sub = '<span style="display:none">' + entry.id.$t + '</span>';
                             var email = entry.gsx$username.$t;
