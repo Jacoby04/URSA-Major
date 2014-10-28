@@ -23,17 +23,22 @@
                             var name = '<span style="display:none">' + entry.id.$t + '</span>';
                             var email = '<span style="display:none">' + entry.id.$t + '</span>';
                             var awesome = '<span style="display:none">' + entry.id.$t + '</span>';
-                            //var email = entry.gsx$username.$t;
-//                            document.getElementById("userNameForSubmission").innerHTML = email;
-                            //var name = entry.gsx$yourname.$t;
-//                            document.getElementById("nameForSubmission").innerHTML = name;
-                            //var awesome = entry.gsx$areyouawesome.$t;
-//                            document.getElementById("awesome").innerHTML = awesome;
+                            var homework = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var writingutensil = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var whyawesome = '<span style="display:none">' + entry.id.$t + '</span>';
                             name += entry.gsx$yourname.$t;
                             email += entry.gsx$username.$t;
                             awesome += entry.gsx$areyouawesome.$t;
-                            $('.subs').append('<hr>' + "Name:".bold() + name + '<hr>' + "Email:".bold() + email + '<hr>' + "awesome:".bold()  + awesome + '</span></hr></br><hr><hr>');
-                         // $('.subs').append('<hr>' + sub + '</span></hr>');
+                            homework += entry.gsx$doyoulikedoinghomework.$t;
+                            writingutensil += entry.gsx$whatisyourfavoritewritingutensil.$t;
+                            whyawesome += entry.gsx$whyareyouawesome.$t;
+                            $('.subs').append('<hr>' +
+                                    "Name:".bold() + '<br>' + name + '<hr>' +
+                                    "Email: ".bold() + '<br>' + email + '<hr>' +
+                                    "Do you like doing homework?: ".bold() + '<br>' + homework + '<hr>' +
+                                    "What is your favorite writing utensil?: ".bold() + '<br>' + writingutensil + '<hr>' +
+                                    "Are you awesome?: ".bold() + '<br>' + awesome + '<hr>' +
+                                    "Why are you awesome?: ".bold() + '<br>' + whyawesome + '</span></hr></br><div class="hrStyle"><hr></div>');
 
 
                         });
