@@ -21,6 +21,12 @@
                         $('div#sub-list').append('<ul class="subs"></ul>');
                         $.each(data.feed.entry, function(i, entry) {
                             var sub = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var entryUserName = entry.gsx$username.$t;
+                            document.getElementById("userNameForSubmission").innerHTML = entryUserName;
+                            var entryName = entry.gsx$yourname.$t;
+                            document.getElementById("nameForSubmission").innerHTML = entryName;
+                            var isAwesome = entry.gsx$areyouawesome.$t;
+                            document.getElementById("awesome").innerHTML = isAwesome;
                             sub += entry.gsx$username.$t;
                             sub += entry.gsx$yourname.$t;
                             sub += entry.gsx$areyouawesome.$t;
@@ -36,7 +42,13 @@
 
 
 <body>
-    <div id="sub-list"></div>
+    <div id="sub-list">
+        <table>
+            <li id="userNameForSubmission"></li>
+            <li id="nameForSubmission"></li>
+            <li id="awesome"></li>
+        </table>
+    </div>
 </body>
 
     <!--<iframe src="https://docs.google.com/spreadsheets/d/11UhreZn8ZcrZ1LSWJz2s1PWEdHcjhuNkVn7w_yPfTFc/pubhtml?alt=json-in-script&callback=?widget=true&amp;headers=false" height="100%" width="100%"></iframe>-->
