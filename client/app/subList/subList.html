@@ -26,6 +26,7 @@
                             var academicDiscipline = '<span style="display:none">' + entry.id.$t + '</span>';
                             var type = '<span style="display:none">' + entry.id.$t + '</span>';
                             var abstract = '<span style="display:none">' + entry.id.$t + '</span>';
+                            var id = '<span style="...">' + entry.id.$t + '</span>';
                             timestamp += entry.gsx$timestamp.$t;
                             adviserApproval += entry.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t;
                             adviser += entry.gsx$facultysponsorprojectadviser.$t;
@@ -33,10 +34,11 @@
                             title += entry.gsx$title.$t;
                             studentNamefirst += entry.gsx$firstnameprimarystudentpresentercontactperson.$t;
                             studentNamelast += entry.gsx$lastnameprimarystudentpresentercontactperson.$t;
-                            studentEmail += entry.gsx$username.$t;
+                            studentEmail += entry.gsx$primarystudentemail.$t;
                             academicDiscipline += entry.gsx$academicdiscplineforproject.$t;
                             type += entry.gsx$typeofpresentation.$t;
                             abstract += entry.gsx$artiststatementproposalabstract1000characterlimitapprox250words.$t;
+                            id += entry.gsx$link.$t;
                             $('.subs').append('<hr>' +
                                     "Title: ".bold() + title + '<hr>' +
                                     "Primary Student Name: ".bold() + studentNamefirst + " " + studentNamelast + ", " + studentEmail + '<hr>' +
@@ -45,7 +47,8 @@
                                     "Statement/Proposal/Abstract: ".bold() + '<br>' + abstract + '<hr>' +
                                     "Date Submitted: ".bold() + timestamp + '<hr>' +
                                     "Faculty Adviser: ".bold() + adviser + ", " + adviserEmail+ '<hr>' +
-                                    "Adviser Approval: ".bold() + adviserApproval +
+                                    "Adviser Approval: ".bold() + adviserApproval + '<hr>' +
+                                    "Link to see in Google Document: ".bold() + id +
                                     '</span></hr></br><div class="hrStyle"><hr></div>');
                         });
                     });
