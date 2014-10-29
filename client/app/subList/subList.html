@@ -26,7 +26,7 @@
                             var academicDiscipline = '<span style="display:none">' + entry.id.$t + '</span>';
                             var type = '<span style="display:none">' + entry.id.$t + '</span>';
                             var abstract = '<span style="display:none">' + entry.id.$t + '</span>';
-                            var id = '<span style="...">' + entry.id.$t + '</span>';
+                            var link = entry.gsx$link.$t;
                             timestamp += entry.gsx$timestamp.$t;
                             adviserApproval += entry.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t;
                             adviser += entry.gsx$facultysponsorprojectadviser.$t;
@@ -38,7 +38,7 @@
                             academicDiscipline += entry.gsx$academicdiscplineforproject.$t;
                             type += entry.gsx$typeofpresentation.$t;
                             abstract += entry.gsx$artiststatementproposalabstract1000characterlimitapprox250words.$t;
-                            id += entry.gsx$link.$t;
+                            var fullLink = "https://docs.google.com/a/morris.umn.edu/document/d/" + link + "/view";
                             $('.subs').append('<hr>' +
                                     "Title: ".bold() + title + '<hr>' +
                                     "Primary Student Name: ".bold() + studentNamefirst + " " + studentNamelast + ", " + studentEmail + '<hr>' +
@@ -48,7 +48,7 @@
                                     "Date Submitted: ".bold() + timestamp + '<hr>' +
                                     "Faculty Adviser: ".bold() + adviser + ", " + adviserEmail+ '<hr>' +
                                     "Adviser Approval: ".bold() + adviserApproval + '<hr>' +
-                                    "Link to see in Google Document: ".bold() + id +
+                                    "Link to see in Google Document: ".bold() + '<a href="https://docs.google.com/a/morris.umn.edu/document/d/' + link + '/view">' + "Link to Document" + '</a>' +
                                     '</span></hr></br><div class="hrStyle"><hr></div>');
                         });
                     });
