@@ -4,15 +4,11 @@
 'use strict';
 
 angular.module('ursaMajorApp')
-    .filter('isntempty', function(){
+    .filter('isntEmpty', function(){
         return function(item, title){
-            if(typeof(item) == "object"){
-                if(item.length > 0){
-                    return title + " " + item;
-                }
-            } else if (item !== "" && item !== null){
-                return title + " " + item;
-            }
+          if (title !== 0) {
+              return title + " " + item;
+          }
         }
     })
 
@@ -27,7 +23,6 @@ angular.module('ursaMajorApp')
                 angular.forEach(data.feed.entry, function(value){
                     $scope.submissions.push(value);
                 });
-                console.log("Success: " + $scope.submissions);
             });
         };
 
