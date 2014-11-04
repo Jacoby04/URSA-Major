@@ -6,7 +6,7 @@ angular.module('ursaMajorApp')
       'title': 'Homepage',
       'link': '/'
     }, {
-        'title': 'Submit a URS Submission',
+        'title': 'Create a URS Submission',
         'link': '/submission'
     }, {
         'title': 'Submission List',
