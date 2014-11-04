@@ -26,3 +26,8 @@
 .bigger-size {
     font-size: 35px;
 }
+
+.marginVert {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

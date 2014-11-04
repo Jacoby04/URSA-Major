@@ -1,0 +1,14 @@
+.breakLongWords {
+    word-wrap: break-word;
+}
+
+.rightSide {
+    display: block;
+    float: right;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.block {
+    display: block;
+}

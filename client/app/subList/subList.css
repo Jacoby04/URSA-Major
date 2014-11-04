@@ -3,3 +3,8 @@
     height: 5px;
     background-color: black;
 }
+
+.subText {
+    font-size: 13px;
+    color: dimgray;
+}
