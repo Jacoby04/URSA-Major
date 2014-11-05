@@ -23,6 +23,14 @@
     background: goldenrod;
 }
 
+.otherText{
+    color: darkslategrey;
+    font-size: 20px;
+    text-wrap: normal;
+    padding-right: 15%;
+    padding-left: 15%;
+}
+
 .bigger-size {
     font-size: 35px;
 }
@@ -30,4 +38,7 @@
 .marginVert {
     margin-top: 5px;
     margin-bottom: 5px;
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
 }
