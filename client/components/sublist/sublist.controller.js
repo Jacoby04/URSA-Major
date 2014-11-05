@@ -12,7 +12,9 @@ angular.module('ursaMajorApp')
         }
     })
 
-    .controller('SublistCtrl', function ($scope, $http, $modal, Modal) {
+    .controller('SublistCtrl', function ($scope, $http, $modal, Modal, Auth) {
+        $scope.getCurrentEmail = Auth.email;
+
         //https://docs.google.com/a/morris.umn.edu/spreadsheets/d/1es5vkh9xXGzStvgFAkpm4nehu5oA9cgKA8WTS9jU13Q/edit#gid=418082616
         $scope.jsonSource = "https://spreadsheets.google.com/feeds/list/1ImSQ0fy65Bc9NjmgHrpruaDrodC2uJ1n4RYl2OTX9Po/od6/public/values?alt=json";
         $scope.submissions = [];
@@ -26,6 +28,25 @@ angular.module('ursaMajorApp')
         };
 
         $scope.updateLocalData();
+
+        $scope.sudoAdmin = false;
+
+        $scope.isCoPresenter = function(sub){
+            if('sub.gsx$co-presentersstudentsemail.$t' != 0){
+                return sub.gsx$co-presentersstudentsemail.$t == Auth.getCurrentUser().email;
+            }
+        };
+
+        $scope.userFilterFunction = function(sub){
+            console.log(sub);
+            if (!Auth.isLoggedIn) {
+                return false;
+            } else if($scope.sudoAdmin) {
+                return true;
+            } else {
+                return (sub.gsx$username.$t == Auth.getCurrentUser().email);
+            }
+        };
 
         $scope.statusColorTab = function(status){
             switch(status){
