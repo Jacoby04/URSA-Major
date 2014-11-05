@@ -42,7 +42,27 @@ User.find({}).remove(function() {
     name: 'Admin',
     email: 'admin@admin.com',
     password: 'admin'
-  }, function() {
+  },
+      {
+          provider: 'google',
+          role: 'admin',
+          name: 'Mitchell Finzel',
+          email: 'finze008@morris.umn.edu',
+          google: {
+              email: 'finze008@morris.umn.edu',
+              family_name: 'Finzel',
+              gender: 'male',
+              given_name: 'Mitchell',
+              hd: 'morris.umn.edu',
+              id: '112639306116346340748',
+              link: "https://plus.google.com/112639306116346340748",
+              locale: "en",
+              name: "Mitchell Finzel",
+              picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+              verified_email: true
+          }
+      },
+      function() {
       console.log('finished populating users');
     }
   );

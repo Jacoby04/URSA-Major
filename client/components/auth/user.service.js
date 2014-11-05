@@ -12,6 +12,11 @@ angular.module('ursaMajorApp')
           controller:'password'
         }
       },
+        changeRole: {
+            method: 'PUT',
+            params: {
+            }
+        },
       get: {
         method: 'GET',
         params: {
