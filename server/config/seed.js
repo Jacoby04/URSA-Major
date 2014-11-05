@@ -42,8 +42,7 @@ User.find({}).remove(function() {
     name: 'Admin',
     email: 'admin@admin.com',
     password: 'admin'
-  },
-      {
+  },{
           provider: 'google',
           role: 'admin',
           name: 'Mitchell Finzel',
@@ -58,6 +57,24 @@ User.find({}).remove(function() {
               link: "https://plus.google.com/112639306116346340748",
               locale: "en",
               name: "Mitchell Finzel",
+              picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+              verified_email: true
+          }
+    }, {
+          provider: 'google',
+          role: 'admin',
+          name: 'Jacob Opdahl',
+          email: 'opdah023@morris.umn.edu',
+          google: {
+              email: 'opdah023@morris.umn.edu',
+              family_name: 'Opdahl',
+              gender: 'male',
+              given_name: 'Jacob',
+              hd: 'morris.umn.edu',
+              id: '111717955914079275928',
+              link: "https://plus.google.com/111717955914079275928",
+              locale: "en",
+              name: "Jacob Opdahl",
               picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
               verified_email: true
           }

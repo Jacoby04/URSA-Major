@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module('ursaMajorApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, $location) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
+
+        if(!Auth.isAdmin()) {
+            $location.path('/');
+        }
 
         $scope.roleOptions =
             [   'Student',
@@ -12,6 +16,7 @@ angular.module('ursaMajorApp')
                 'Review Group 2',
                 'Committee Chair'
             ];
+
         $scope.role =
             [""];
 
