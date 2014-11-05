@@ -32,8 +32,8 @@ angular.module('ursaMajorApp')
         $scope.sudoAdmin = false;
 
         $scope.isCoPresenter = function(sub){
-            if('sub.gsx$co-presentersstudentsemail.$t' != 0){
-                return sub.gsx$co-presentersstudentsemail.$t == Auth.getCurrentUser().email;
+            if(sub['gsx$co-presentersstudentsemail'].$t != 0){
+                return sub['gsx$co-presentersstudentsemail'].$t == Auth.getCurrentUser().email;
             }
         };
 
@@ -44,7 +44,7 @@ angular.module('ursaMajorApp')
             } else if($scope.sudoAdmin) {
                 return true;
             } else {
-                return (sub.gsx$username.$t == Auth.getCurrentUser().email);
+                return (sub.gsx$username.$t == Auth.getCurrentUser().email || $scope.isCoPresenter(sub));
             }
         };
 
