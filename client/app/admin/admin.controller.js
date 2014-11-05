@@ -15,7 +15,7 @@ angular.module('ursaMajorApp')
                 'Review Group 1',
                 'Review Group 2',
                 'Committee Chair',
-                'Administrator'
+                'admin'
             ];
 
         $scope.role =
