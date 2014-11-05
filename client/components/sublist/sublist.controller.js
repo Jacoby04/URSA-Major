@@ -3,6 +3,8 @@
  */
 'use strict';
 
+
+
 angular.module('ursaMajorApp')
     .filter('isntEmpty', function(){
         return function(item, title){
@@ -12,7 +14,12 @@ angular.module('ursaMajorApp')
         }
     })
 
-    .controller('SublistCtrl', function ($scope, $http, $modal, Modal, Auth) {
+
+
+    .controller('SublistCtrl', function ($scope, $http, $modal, Modal, Auth, $location) {
+        if(Auth.isLoggedIn() === false) {
+            $location.path('/');
+        }
         $scope.getCurrentEmail = Auth.email;
 
         //https://docs.google.com/a/morris.umn.edu/spreadsheets/d/1es5vkh9xXGzStvgFAkpm4nehu5oA9cgKA8WTS9jU13Q/edit#gid=418082616
