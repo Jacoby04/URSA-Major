@@ -13,8 +13,7 @@ angular.module('ursaMajorApp')
     })
 
     .controller('SublistCtrl', function ($scope, $http, $modal, Modal) {
-
-
+        //https://docs.google.com/a/morris.umn.edu/spreadsheets/d/1es5vkh9xXGzStvgFAkpm4nehu5oA9cgKA8WTS9jU13Q/edit#gid=418082616
         $scope.jsonSource = "https://spreadsheets.google.com/feeds/list/1ImSQ0fy65Bc9NjmgHrpruaDrodC2uJ1n4RYl2OTX9Po/od6/public/values?alt=json";
         $scope.submissions = [];
 
