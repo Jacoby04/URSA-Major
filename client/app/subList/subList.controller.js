@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('ursaMajorApp')
-    .controller('SublistCtrl', function ($scope, $http, Auth) {
-        $scope.isLoggedIn = Auth.isLoggedIn;
+    .controller('SublistCtrl', function ($scope, $http, Auth, $location) {
+        if(Auth.isLoggedIn() === false) {
+            $location.path('/');
+        }
 
+        $scope.isLoggedIn = Auth.isLoggedIn;
         $scope.jsonSource = "https://spreadsheets.google.com/feeds/list/1ImSQ0fy65Bc9NjmgHrpruaDrodC2uJ1n4RYl2OTX9Po/od6/public/values?alt=json";
         $scope.localData = [];
 
@@ -17,4 +20,3 @@ angular.module('ursaMajorApp')
 
         $scope.updateLocalData();
     });
-
