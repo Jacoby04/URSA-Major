@@ -11,7 +11,7 @@
 
 .FancyBox {
     background-color: lightgray;
-    border-radius: 20px;
+    border-radius: 1px;
     margin: 20px;
-    border: 1px #000000 solid;
+    border:0px #000000 solid;
 }
