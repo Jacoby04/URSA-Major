@@ -88,7 +88,7 @@ angular.module('ursaMajorApp')
         };
 
         //------------------ Controlling selection of submission for detail view ------------------
-        $scope.selection = {selected: false, item: null};
+        $scope.selection = {selected: false, item: null, comments: null};
 
         $scope.selectItem = function(itemIndex){
             console.log("setting index " + itemIndex + " as active item");
@@ -98,6 +98,13 @@ angular.module('ursaMajorApp')
 
         $scope.resetSelection = function(){
             $scope.selection.selected = false;
+            $scope.selection.comments = null;
+        };
+
+        $scope.getComments = function(){
+            $http({method:'GET', url: "https://www.googleapis.com/drive/v2/files/" + $scope.selection.item.gsx$link.$t + "/comments"}).success(function(data){
+                $scope.selection.comments = data;
+            })
         };
 
         $scope.deleteSubmissionConfirm = function(item){
