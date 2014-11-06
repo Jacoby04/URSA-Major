@@ -22,6 +22,7 @@ angular.module('ursaMajorApp')
         }
         $scope.getCurrentEmail = Auth.email;
 
+        //------------------------- Getting data from google ------------------------
         //https://docs.google.com/a/morris.umn.edu/spreadsheets/d/1es5vkh9xXGzStvgFAkpm4nehu5oA9cgKA8WTS9jU13Q/edit#gid=418082616
         $scope.jsonSource = "https://spreadsheets.google.com/feeds/list/1ImSQ0fy65Bc9NjmgHrpruaDrodC2uJ1n4RYl2OTX9Po/od6/public/values?alt=json";
         $scope.submissions = [];
@@ -36,7 +37,7 @@ angular.module('ursaMajorApp')
 
         $scope.updateLocalData();
 
-        $scope.sudoAdmin = false;
+        //---------------- Filter Stuff --------------------------------
         $scope.searchText = "";
 
         $scope.isCoPresenter = function(sub){
@@ -56,13 +57,14 @@ angular.module('ursaMajorApp')
         };
 
         $scope.nameSearchFilterFunction = function(sub){
-            if((sub.gsx$lastnameprimarystudentpresentercontactperson.$t).indexOf($scope.searchText) != -1){
-                return true;
-            } else {
-                return false;
-            }
+            return (
+                (sub.gsx$lastnameprimarystudentpresentercontactperson.$t).indexOf($scope.searchText) != -1 ||
+                (sub.gsx$title.$t).indexOf($scope.searchText) != -1 ||
+                (sub.gsx$firstnameprimarystudentpresentercontactperson.$t).indexOf($scope.searchText) != -1
+                );
         };
 
+        //-------------------- Color coding of submissions ----------------------
         $scope.statusColorTab = function(status){
             switch(status){
                 case "Yes":
@@ -85,7 +87,7 @@ angular.module('ursaMajorApp')
             }
         };
 
-        // Controlling selection of submission for detail view
+        //------------------ Controlling selection of submission for detail view ------------------
         $scope.selection = {selected: false, item: null};
 
         $scope.selectItem = function(itemIndex){
