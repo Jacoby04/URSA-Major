@@ -120,7 +120,7 @@ angular.module('ursaMajorApp')
 
         $scope.submitStatusEdit = function(){
             alert("This doesn't work right now because we haven't figured out how to do it with google yet. Sorry.");
-        }
+        };
 
 
     });

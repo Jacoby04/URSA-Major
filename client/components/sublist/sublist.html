@@ -28,6 +28,12 @@
                     <p>Approved? {{sub.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t}}</p>
                     <p>Sponsors: {{sub.gsx$sponsoringorganizationorfundchooseanyapplicable.$t}}</p>
                     <p>{{sub.gsx$doyouanticipateanyspecialroomlocationnon-mediaservicesequipmenti.e.recitalhallpianoetc.orschedulingrequirementsi.e.severalgroupsholdingaforumthatwouldrequiremorethantheallotted15minutespleaseexplainindetail.$t | isntEmpty:sub.gsx$doyouanticipateanyspecialroomlocationnon-mediaservicesequipmenti.e.recitalhallpianoetc.orschedulingrequirementsi.e.severalgroupsholdingaforumthatwouldrequiremorethantheallotted15minutespleaseexplainindetail.$t:"Media Services Equipment"}}</p>
+                    <select ng-hide = "Auth.getCurrentUser().role == 'admin'" id="groups" onselect="assignGroup()">
+                        <option value="">Nothing Selected</option>
+                        <option value="Group 1">Group 1</option>
+                        <option value="Group 2">Group 2</option>
+                    </select>
+                    <button onclick="window.open('https://script.google.com/a/macros/morris.umn.edu/s/AKfycby4IAhH4LGzaySvRG68c2bh4mHnM8Mp_65o-EqrAvsKzDeKUI4/exec')">do</button>
                 </li>
             </ul>
             <button class="btn btn-primary btn-sm" ng-click="selectItem($index)">Details</button>
