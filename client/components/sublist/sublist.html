@@ -3,16 +3,22 @@
     <ul class="list-group" ng-hide="selection.selected">
         <li class="list-group-item">
             <h2>List of stored submissions</h2>
+            <br>
             <label>
-                <input type="checkbox" ng-model="sudoAdmin">
-                Sudo
+                Search:
+                <input type="text" ng-model="searchText" placeholder="search by last name">
             </label>
 
         </li>
-        <li class="list-group-item" ng-repeat="sub in submissions | filter:userFilterFunction" ng-style="statusColorTab(sub.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t)">
+        <li class="list-group-item" ng-show="submissions.length < 1">
+            <img class="centerImage" src="../../assets/images/hourglass-gif.gif">
+            <!-- gif plundered from: http://www.joe.ie/tech/its-the-internets-25th-birthday-so-here-are-25-things-weve-loved-about-the-world-wide-web/415506 -->
+        </li>
+        <li class="list-group-item" ng-repeat="sub in submissions | filter:userFilterFunction | filter:nameSearchFilterFunction" ng-style="statusColorTab(sub.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t)">
             <h3>{{sub.gsx$title.$t}}</h3>
             <strong>{{sub.gsx$lastnameprimarystudentpresentercontactperson.$t}}, {{sub.gsx$firstnameprimarystudentpresentercontactperson.$t}}</strong>
             <hr>
+            {{isCoPresenter(sub)}}
             <ul class="list-group">
                 <li class="list-group-item">
                     <p>Discipline: {{sub.gsx$academicdiscplineforproject.$t}}</p>
