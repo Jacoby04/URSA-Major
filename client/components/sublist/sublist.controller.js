@@ -16,7 +16,7 @@ angular.module('ursaMajorApp')
 
 
 
-    .controller('SublistCtrl', function ($scope, $http, $modal, Modal, Auth, $location) {
+    .controller('SublistCtrl', function ($scope, $http, $modal, Modal, Auth, $location, $filter) {
         if(Auth.isLoggedIn() === false) {
             $location.path('/');
         }
@@ -37,6 +37,7 @@ angular.module('ursaMajorApp')
         $scope.updateLocalData();
 
         $scope.sudoAdmin = false;
+        $scope.searchText = "";
 
         $scope.isCoPresenter = function(sub){
             if(sub['gsx$co-presentersstudentsemail'].$t != 0){
@@ -45,13 +46,20 @@ angular.module('ursaMajorApp')
         };
 
         $scope.userFilterFunction = function(sub){
-            console.log(sub);
             if (!Auth.isLoggedIn) {
                 return false;
-            } else if($scope.sudoAdmin) {
+            } else if($scope.sudoAdmin || Auth.getCurrentUser().role == "admin") {
                 return true;
             } else {
                 return (sub.gsx$username.$t == Auth.getCurrentUser().email || $scope.isCoPresenter(sub));
+            }
+        };
+
+        $scope.nameSearchFilterFunction = function(sub){
+            if((sub.gsx$lastnameprimarystudentpresentercontactperson.$t).indexOf($scope.searchText) != -1){
+                return true;
+            } else {
+                return false;
             }
         };
 
@@ -83,7 +91,7 @@ angular.module('ursaMajorApp')
         $scope.selectItem = function(itemIndex){
             console.log("setting index " + itemIndex + " as active item");
             $scope.selection.selected = true;
-            $scope.selection.item = $scope.submissions[itemIndex];
+            $scope.selection.item = $filter('filter')($filter('filter')($scope.submissions, $scope.userFilterFunction), $scope.nameSearchFilterFunction)[itemIndex];
         };
 
         $scope.resetSelection = function(){
