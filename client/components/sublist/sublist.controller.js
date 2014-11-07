@@ -35,12 +35,16 @@ angular.module('ursaMajorApp')
             });
         };
 
-        $scope.updateLocalData();
-
         //---------------- Filter Stuff --------------------------------
         $scope.searchText = "";
         $scope.missingReviewGroupCheck = false;
-        $scope.reviewGroupTwoCheck = false;
+        $scope.reviewGroupFilterSelection = "All";
+        $scope.reviewGroupFilterOptions = [
+            "All",
+            "None",
+            "Review Group 1",
+            "Review Group 2"
+        ];
 
         $scope.isCoPresenter = function(sub){
             if(sub['gsx$co-presentersstudentsemail'].$t != 0){
@@ -57,7 +61,13 @@ angular.module('ursaMajorApp')
         };
 
         $scope.reviewGroupTwo = function(sub){
-            return !$scope.reviewGroupTwoCheck || (sub.gsx$reviewgroup.$t == "Review Group 2");
+            if($scope.reviewGroupFilterSelection === "All"){
+                return true;
+            } else if($scope.reviewGroupFilterSelection === "None"){
+                return (sub.gsx$reviewgroup.$t == 0);
+            } else {
+                return (sub.gsx$reviewgroup.$t === $scope.reviewGroupFilterSelection)
+            }
         };
 
         $scope.userFilterFunction = function(sub){
@@ -87,6 +97,7 @@ angular.module('ursaMajorApp')
                     break;
                 case "No":
                     return {'border-left': '4px solid rgba(255, 0, 0, 1)'};
+                    console.log("Http request success!");
                     break;
             }
         };
@@ -154,7 +165,12 @@ angular.module('ursaMajorApp')
 
         $scope.submitStatusEdit = function(){
             alert("This doesn't work right now because we haven't figured out how to do it with google yet. Sorry.");
+        };
+
+        //------------------ getting data ----------------------
+
+        if($scope.submissions.length == 0){
+            console.log("updating local data!");
+            $scope.updateLocalData();
         }
-
-
     });

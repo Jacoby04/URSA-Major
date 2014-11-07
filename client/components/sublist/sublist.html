@@ -1,4 +1,4 @@
-<div class="container-fluid breakLongWords" ng-controller="SublistCtrl">
+<div class="container-fluid breakLongWords">
 
     <ul class="list-group" ng-hide="selection.selected">
         <li class="list-group-item">
@@ -10,13 +10,10 @@
             </label>
             <br>
             <label>
-                <input type="checkbox" ng-model="missingReviewGroupCheck">
-                Missing Review Group
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" ng-model="reviewGroupTwoCheck">
-                Review Group 2
+                Sort by review group
+                <select ng-model="reviewGroupFilterSelection">
+                    <option ng-repeat="option in reviewGroupFilterOptions" ng-value="'{{option}}'">{{option}}</option>
+                </select>
             </label>
         </li>
         <li class="list-group-item" ng-show="submissions.length < 1">
