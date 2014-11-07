@@ -1,4 +1,4 @@
 URSA-Major
 ==========
- This is the readme for the URSA-Major project!
-https://travis-ci.org/[USERNAME]/[REPOSITORY].svg?branch=master
+
+[![Build Status](https://travis-ci.org/Jacoby04/URSA-Major.svg?branch=master)](https://travis-ci.org/Jacoby04/URSA-Major)
