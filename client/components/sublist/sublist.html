@@ -8,13 +8,23 @@
                 Search:
                 <input type="text" ng-model="searchText" placeholder="search by names or title">
             </label>
-
+            <br>
+            <label>
+                <input type="checkbox" ng-model="missingReviewGroupCheck">
+                Missing Review Group
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" ng-model="reviewGroupTwoCheck">
+                Review Group 2
+            </label>
         </li>
         <li class="list-group-item" ng-show="submissions.length < 1">
             <img class="centerImage" src="../../assets/images/hourglass-gif.gif">
             <!-- gif plundered from: http://www.joe.ie/tech/its-the-internets-25th-birthday-so-here-are-25-things-weve-loved-about-the-world-wide-web/415506 -->
+            <p class="subtext center-text">If this is taking a long time, try reloading the page</p>
         </li>
-        <li class="list-group-item" ng-repeat="sub in submissions | filter:userFilterFunction | filter:nameSearchFilterFunction" ng-style="statusColorTab(sub.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t)">
+        <li class="list-group-item" ng-repeat="sub in submissions | filter:userFilterFunction | filter:missingReviewGroup | filter:reviewGroupTwo | filter:nameSearchFilterFunction" ng-style="statusColorTab(sub.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t)">
             <h3>{{sub.gsx$title.$t}}</h3>
             <strong>{{sub.gsx$lastnameprimarystudentpresentercontactperson.$t}}, {{sub.gsx$firstnameprimarystudentpresentercontactperson.$t}}</strong>
             <hr>
@@ -25,9 +35,9 @@
                     <p>Type: {{sub.gsx$typeofpresentation.$t}}</p>
                     <p>Advisor: {{sub.gsx$facultysponsorprojectadviser.$t}}, email: {{sub.gsx$facultysponsorprojectadviseremail.$t}}</p>
                     <p>Approved? {{sub.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t}}</p>
-                    <p>Sponsors: {{sub.gsx$sponsoringorganizationorfundchooseanyapplicable.$t}}</p>
-                    <p>{{sub.gsx$doyouanticipateanyspecialroomlocationnon-mediaservicesequipmenti.e.recitalhallpianoetc.orschedulingrequirementsi.e.severalgroupsholdingaforumthatwouldrequiremorethantheallotted15minutespleaseexplainindetail.$t | isntEmpty:sub.gsx$doyouanticipateanyspecialroomlocationnon-mediaservicesequipmenti.e.recitalhallpianoetc.orschedulingrequirementsi.e.severalgroupsholdingaforumthatwouldrequiremorethantheallotted15minutespleaseexplainindetail.$t:"Media Services Equipment"}}</p>
-                    <p>Review Group: {{selection.item.gsx$reviewgroup.$t}}</p>
+                    <p>{{sub.gsx$sponsoringorganizationorfundchooseanyapplicable.$t | isntEmpty:"Sponsors:"}}</p>
+                    <p>{{sub.gsx$doyouanticipateanyspecialroomlocationnon-mediaservicesequipmenti.e.recitalhallpianoetc.orschedulingrequirementsi.e.severalgroupsholdingaforumthatwouldrequiremorethantheallotted15minutespleaseexplainindetail.$t | isntEmpty:"Media Services Equipment":""}}</p>
+                    <p>{{sub.gsx$reviewgroup.$t | isntEmpty:"":"Review group not yet assigned"}}</p>
                 </li>
             </ul>
             <button class="btn btn-primary btn-sm" ng-click="selectItem($index)">Details</button>
@@ -80,7 +90,7 @@
                     <p>Advisor: {{selection.item.gsx$facultysponsorprojectadviser.$t}}, email: {{selection.item.gsx$facultysponsorprojectadviseremail.$t}}</p>
                     <p>{{selection.item.gsx$sponsoringorganizationorfundchooseanyapplicable.$t | isntEmpty:"Sponsors:"}}</p>
                     <p>Approved? {{selection.item.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t}}</p>
-                    <p>{{selection.item.sub.gsx$doyouanticipateanyspecialroomlocationnon-mediaservicesequipmenti.e.recitalhallpianoetc.orschedulingrequirementsi.e.severalgroupsholdingaforumthatwouldrequiremorethantheallotted15minutespleaseexplainindetail.$t | isntEmpty:selection.item.sub.gsx$doyouanticipateanyspecialroomlocationnon-mediaservicesequipmenti.e.recitalhallpianoetc.orschedulingrequirementsi.e.severalgroupsholdingaforumthatwouldrequiremorethantheallotted15minutespleaseexplainindetail.$t:"Media Services Equipment:"}}</p>
+                    <p>{{selection.item.sub.gsx$doyouanticipateanyspecialroomlocationnon-mediaservicesequipmenti.e.recitalhallpianoetc.orschedulingrequirementsi.e.severalgroupsholdingaforumthatwouldrequiremorethantheallotted15minutespleaseexplainindetail.$t | isntEmpty:"Media Services Equipment:"}}</p>
 
                 </li>
             </ul>

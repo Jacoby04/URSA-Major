@@ -7,14 +7,14 @@
 
 angular.module('ursaMajorApp')
     .filter('isntEmpty', function(){
-        return function(item, title){
-          if (title !== 0) {
-              return title + " " + item;
+        return function(input, title, altTitle){
+          if (input != 0) {
+              return title + " " + input;
+          } else {
+              return altTitle;
           }
         }
     })
-
-
 
     .controller('SublistCtrl', function ($scope, $http, $modal, Modal, Auth, $location, $filter) {
         if(Auth.isLoggedIn() === false) {
@@ -39,6 +39,8 @@ angular.module('ursaMajorApp')
 
         //---------------- Filter Stuff --------------------------------
         $scope.searchText = "";
+        $scope.missingReviewGroupCheck = false;
+        $scope.reviewGroupTwoCheck = false;
 
         $scope.isCoPresenter = function(sub){
             if(sub['gsx$co-presentersstudentsemail'].$t != 0){
@@ -46,21 +48,34 @@ angular.module('ursaMajorApp')
             }
         };
 
+        $scope.isReviewer = function(sub){
+          return (sub.gsx$reviewgroup.$t != 0 && sub.gsx$reviewgroup.$t === Auth.getCurrentUser().role);
+        };
+
+        $scope.missingReviewGroup = function(sub){
+            return !$scope.missingReviewGroupCheck || (sub.gsx$reviewgroup.$t == 0);
+        };
+
+        $scope.reviewGroupTwo = function(sub){
+            return !$scope.reviewGroupTwoCheck || (sub.gsx$reviewgroup.$t == "Review Group 2");
+        };
+
         $scope.userFilterFunction = function(sub){
             if (!Auth.isLoggedIn) {
                 return false;
             } else if($scope.sudoAdmin || Auth.getCurrentUser().role == "admin") {
+                console.log("Admin = yes");
                 return true;
             } else {
-                return (sub.gsx$username.$t == Auth.getCurrentUser().email || $scope.isCoPresenter(sub));
+                return (sub.gsx$primarystudentemail.$t == Auth.getCurrentUser().email || $scope.isCoPresenter(sub) || $scope.isReviewer(sub));
             }
         };
 
         $scope.nameSearchFilterFunction = function(sub){
             return (
-                (sub.gsx$lastnameprimarystudentpresentercontactperson.$t).indexOf($scope.searchText) != -1 ||
-                (sub.gsx$title.$t).indexOf($scope.searchText) != -1 ||
-                (sub.gsx$firstnameprimarystudentpresentercontactperson.$t).indexOf($scope.searchText) != -1
+                (sub.gsx$lastnameprimarystudentpresentercontactperson.$t.toLowerCase()).indexOf($scope.searchText.toLowerCase()) != -1 ||
+                (sub.gsx$title.$t.toLowerCase()).indexOf($scope.searchText.toLowerCase()) != -1 ||
+                (sub.gsx$firstnameprimarystudentpresentercontactperson.$t.toLowerCase()).indexOf($scope.searchText.toLowerCase()) != -1
                 );
         };
 
@@ -102,9 +117,21 @@ angular.module('ursaMajorApp')
         };
 
         $scope.getComments = function(){
-            $http({method:'GET', url: "https://www.googleapis.com/drive/v2/files/" + $scope.selection.item.gsx$link.$t + "/comments"}).success(function(data){
-                $scope.selection.comments = data;
-            })
+//            $http({method:'GET', url: "https://www.googleapis.com/drive/v2/files/" + $scope.selection.item.gsx$link.$t + "/comments"}).success(function(data){
+//                $scope.selection.comments = data;
+//            })
+              var request = gapi.client.drive.comments.list({'fileId': $scope.selection.item.gsx$link.$t});
+              request.execute(function(data){
+                  $scope.selection.comments = data
+              });
+        };
+
+        $scope.getMiscData = function(sub){
+            var query = new google.visualization.Query($scope.jsonSource);
+            query.setQuery('select C');
+            query.send(function(response){
+                $scope.selection.comments = response.getTableData();
+            });
         };
 
         $scope.deleteSubmissionConfirm = function(item){
