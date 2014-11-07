@@ -78,6 +78,42 @@ User.find({}).remove(function() {
               picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
               verified_email: true
           }
+      }, {
+          provider: 'google',
+          role: 'Review Group 1',
+          name: 'Peter Hanson',
+          email: 'hans4858@morris.umn.edu',
+          google: {
+              email: 'hans4858@morris.umn.edu',
+              family_name: 'Hanson',
+              gender: 'male',
+              given_name: 'Peter',
+              hd: 'morris.umn.edu',
+              id: '117169414321077766183',
+              link: "https://plus.google.com/117169414321077766183",
+              locale: "en",
+              name: "Peter Hanson",
+              picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+              verified_email: true
+          }
+      }, {
+          provider: 'google',
+          role: 'Review Group 2',
+          name: 'Brandon Moody',
+          email: 'moody107@morris.umn.edu',
+          google: {
+              email: 'moody107@morris.umn.edu',
+              family_name: 'Moody',
+              gender: 'male',
+              given_name: 'Brandon',
+              hd: 'morris.umn.edu',
+              id: '107461311188536682688',
+              link: "https://plus.google.com/107461311188536682688",
+              locale: "en",
+              name: "Brandon Moody",
+              picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+              verified_email: true
+          }
       },
       function() {
       console.log('finished populating users');
