@@ -46,12 +46,12 @@
         <li class="list-group-item">
             <button class="btn btn-sm btn-block" ng-click="resetSelection()">Back to submission list</button>
             <br>
-            <button class="btn btn-sm btn-danger" ng-click="deleteSubmissionConfirm(selection.item)"><span class="glyphicon glyphicon-trash"></span></button>
+            <button ng-show="isAnAdmin()" class="btn btn-sm btn-danger" ng-click="deleteSubmissionConfirm(selection.item)"><span class="glyphicon glyphicon-trash"></span></button>
         </li>
         <li class="list-group-item" ng-style="statusColorTab(selection.item.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t)">
 
             <div class="block alert" ng-style="statusColorBody(selection.item.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t)">
-                <button class="btn btn-sm btn-warning close" ng-click="editStatus(selection.item)"><span class="glyphicon glyphicon-file"></span></button>
+                <button ng-show="isAnAdmin()" class="btn btn-sm btn-warning close" ng-click="editStatus(selection.item)"><span class="glyphicon glyphicon-file"></span></button>
                 <b>Status:</b> {{selection.item.gsx$haveyoumetwithyourprojectadviserfortheirreviewofyourabstractandtheirapprovaltosubmit.$t}} <br>
                 <div ng-show="statusEdit.editing">
                     <hr>

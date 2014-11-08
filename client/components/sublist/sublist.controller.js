@@ -167,6 +167,10 @@ angular.module('ursaMajorApp')
             alert("This doesn't work right now because we haven't figured out how to do it with google yet. Sorry.");
         };
 
+        $scope.isAnAdmin = function() {
+            return (Auth.getCurrentUser().role == 'admin')
+        };
+
         //------------------ getting data ----------------------
 
         if($scope.submissions.length == 0){
