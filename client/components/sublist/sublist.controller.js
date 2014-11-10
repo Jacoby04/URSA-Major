@@ -37,7 +37,7 @@ angular.module('ursaMajorApp')
 
         //---------------- Filter Stuff --------------------------------
         $scope.searchText = "";
-        //$scope.missingReviewGroupCheck = false;
+        $scope.missingReviewGroupCheck = false;
         $scope.reviewGroupFilterSelection = "All";
         $scope.reviewGroupFilterOptions = [
             "All",
@@ -57,7 +57,7 @@ angular.module('ursaMajorApp')
         };
 
         $scope.missingReviewGroup = function(sub){
-            return /*!$scope.missingReviewGroupCheck ||*/ (sub.gsx$reviewgroup.$t == 0);
+            return !$scope.missingReviewGroupCheck || (sub.gsx$reviewgroup.$t == 0);
         };
 
         $scope.reviewGroupTwo = function(sub){
@@ -152,7 +152,7 @@ angular.module('ursaMajorApp')
         };
 
         $scope.deleteSubmission = function(item){
-            alert("the delete button doesn't work right now because we haven't figured out how to do that yet. Sorry.");
+            alert("The delete button doesn't work right now because we haven't figured out how to do that yet with Google. Sorry.");
         };
 
         // Controlling editing of status in details view
@@ -166,7 +166,7 @@ angular.module('ursaMajorApp')
         };
 
         $scope.submitStatusEdit = function(){
-            alert("This doesn't work right now because we haven't figured out how to do it with google yet. Sorry.");
+            alert("This doesn't work right now because we haven't figured out how to do it with Google yet. Sorry.");
         };
 
         $scope.isAnAdmin = function() {
