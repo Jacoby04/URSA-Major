@@ -2,20 +2,25 @@
 
 angular.module('ursaMajorApp')
   .controller('MainCtrl', function ($scope, $http, Auth) {
-      $scope.isLoggedIn = Auth.isLoggedIn;
-        
-//
-//    $scope.jsonSource = "https://spreadsheets.google.com/feeds/list/1ImSQ0fy65Bc9NjmgHrpruaDrodC2uJ1n4RYl2OTX9Po/od6/public/values?alt=json";
-//    $scope.localData = [];
-//
-//    $scope.updateLocalData = function(){
-//        $http({method:'GET', url: $scope.jsonSource}).success(function(data) {
-//            angular.forEach(data.feed.entry, function(value){
-//                $scope.localData.push(value);
-//            });
-//        });
-//    };
-//
-//    $scope.updateLocalData();
+
+        $scope.awesomeThings = [];
+
+        $scope.isLoggedIn = Auth.isLoggedIn;
+
+        $http.get('/api/things').success(function(awesomeThings) {
+            $scope.awesomeThings = awesomeThings;
+        });
+
+        $scope.addThing = function() {
+            if($scope.newThing === '') {
+                return;
+            }
+            $http.post('/api/things', { name: $scope.newThing });
+            $scope.newThing = '';
+        };
+
+        $scope.deleteThing = function(thing) {
+            $http.delete('/api/things/' + thing._id);
+        };
 
   });

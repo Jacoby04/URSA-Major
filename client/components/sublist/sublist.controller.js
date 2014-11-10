@@ -7,14 +7,14 @@
 
 angular.module('ursaMajorApp')
     .filter('isntEmpty', function(){
-        return function(item, title){
-          if (title !== 0) {
-              return title + " " + item;
+        return function(input, title, altTitle){
+          if (input != 0) {
+              return title + " " + input;
+          } else {
+              return altTitle;
           }
         }
     })
-
-
 
     .controller('SublistCtrl', function ($scope, $http, $modal, Modal, Auth, $location, $filter) {
         if(Auth.isLoggedIn() === false) {
@@ -35,10 +35,16 @@ angular.module('ursaMajorApp')
             });
         };
 
-        $scope.updateLocalData();
-
         //---------------- Filter Stuff --------------------------------
         $scope.searchText = "";
+        $scope.missingReviewGroupCheck = false;
+        $scope.reviewGroupFilterSelection = "All";
+        $scope.reviewGroupFilterOptions = [
+            "All",
+            "None",
+            "Review Group 1",
+            "Review Group 2"
+        ];
 
         $scope.isCoPresenter = function(sub){
             if(sub['gsx$co-presentersstudentsemail'].$t != 0){
@@ -46,21 +52,40 @@ angular.module('ursaMajorApp')
             }
         };
 
+        $scope.isReviewer = function(sub){
+          return (sub.gsx$reviewgroup.$t != 0 && sub.gsx$reviewgroup.$t === Auth.getCurrentUser().role);
+        };
+
+        $scope.missingReviewGroup = function(sub){
+            return !$scope.missingReviewGroupCheck || (sub.gsx$reviewgroup.$t == 0);
+        };
+
+        $scope.reviewGroupTwo = function(sub){
+            if($scope.reviewGroupFilterSelection === "All"){
+                return true;
+            } else if($scope.reviewGroupFilterSelection === "None"){
+                return (sub.gsx$reviewgroup.$t == 0);
+            } else {
+                return (sub.gsx$reviewgroup.$t === $scope.reviewGroupFilterSelection)
+            }
+        };
+
         $scope.userFilterFunction = function(sub){
             if (!Auth.isLoggedIn) {
                 return false;
             } else if($scope.sudoAdmin || Auth.getCurrentUser().role == "admin") {
+                console.log("Admin = yes");
                 return true;
             } else {
-                return (sub.gsx$username.$t == Auth.getCurrentUser().email || $scope.isCoPresenter(sub));
+                return (sub.gsx$primarystudentemail.$t == Auth.getCurrentUser().email || $scope.isCoPresenter(sub) || $scope.isReviewer(sub));
             }
         };
 
         $scope.nameSearchFilterFunction = function(sub){
             return (
-                (sub.gsx$lastnameprimarystudentpresentercontactperson.$t).indexOf($scope.searchText) != -1 ||
-                (sub.gsx$title.$t).indexOf($scope.searchText) != -1 ||
-                (sub.gsx$firstnameprimarystudentpresentercontactperson.$t).indexOf($scope.searchText) != -1
+                (sub.gsx$lastnameprimarystudentpresentercontactperson.$t.toLowerCase()).indexOf($scope.searchText.toLowerCase()) != -1 ||
+                (sub.gsx$title.$t.toLowerCase()).indexOf($scope.searchText.toLowerCase()) != -1 ||
+                (sub.gsx$firstnameprimarystudentpresentercontactperson.$t.toLowerCase()).indexOf($scope.searchText.toLowerCase()) != -1
                 );
         };
 
@@ -72,6 +97,7 @@ angular.module('ursaMajorApp')
                     break;
                 case "No":
                     return {'border-left': '4px solid rgba(255, 0, 0, 1)'};
+                    console.log("Http request success!");
                     break;
             }
         };
@@ -102,9 +128,21 @@ angular.module('ursaMajorApp')
         };
 
         $scope.getComments = function(){
-            $http({method:'GET', url: "https://www.googleapis.com/drive/v2/files/" + $scope.selection.item.gsx$link.$t + "/comments"}).success(function(data){
-                $scope.selection.comments = data;
-            })
+//            $http({method:'GET', url: "https://www.googleapis.com/drive/v2/files/" + $scope.selection.item.gsx$link.$t + "/comments"}).success(function(data){
+//                $scope.selection.comments = data;
+//            })
+              var request = gapi.client.drive.comments.list({'fileId': $scope.selection.item.gsx$link.$t});
+              request.execute(function(data){
+                  $scope.selection.comments = data
+              });
+        };
+
+        $scope.getMiscData = function(sub){
+            var query = new google.visualization.Query($scope.jsonSource);
+            query.setQuery('select C');
+            query.send(function(response){
+                $scope.selection.comments = response.getTableData();
+            });
         };
 
         $scope.deleteSubmissionConfirm = function(item){
@@ -129,5 +167,14 @@ angular.module('ursaMajorApp')
             alert("This doesn't work right now because we haven't figured out how to do it with google yet. Sorry.");
         };
 
+        $scope.isAnAdmin = function() {
+            return (Auth.getCurrentUser().role == 'admin')
+        };
 
+        //------------------ getting data ----------------------
+
+        if($scope.submissions.length == 0){
+            console.log("updating local data!");
+            $scope.updateLocalData();
+        }
     });
