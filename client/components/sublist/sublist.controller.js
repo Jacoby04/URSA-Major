@@ -37,7 +37,7 @@ angular.module('ursaMajorApp')
 
         //---------------- Filter Stuff --------------------------------
         $scope.searchText = "";
-        $scope.missingReviewGroupCheck = false;
+        //$scope.missingReviewGroupCheck = false;
         $scope.reviewGroupFilterSelection = "All";
         $scope.reviewGroupFilterOptions = [
             "All",
@@ -57,10 +57,11 @@ angular.module('ursaMajorApp')
         };
 
         $scope.missingReviewGroup = function(sub){
-            return !$scope.missingReviewGroupCheck || (sub.gsx$reviewgroup.$t == 0);
+            return /*!$scope.missingReviewGroupCheck ||*/ (sub.gsx$reviewgroup.$t == 0);
         };
 
         $scope.reviewGroupTwo = function(sub){
+            console.log("Showing only certain review groups.");
             if($scope.reviewGroupFilterSelection === "All"){
                 return true;
             } else if($scope.reviewGroupFilterSelection === "None"){
@@ -73,7 +74,7 @@ angular.module('ursaMajorApp')
         $scope.userFilterFunction = function(sub){
             if (!Auth.isLoggedIn) {
                 return false;
-            } else if($scope.sudoAdmin || Auth.getCurrentUser().role == "admin") {
+            } else if(Auth.getCurrentUser().role == "admin") {
                 console.log("Admin = yes");
                 return true;
             } else {
@@ -82,6 +83,7 @@ angular.module('ursaMajorApp')
         };
 
         $scope.nameSearchFilterFunction = function(sub){
+            console.log("Searching by text");
             return (
                 (sub.gsx$lastnameprimarystudentpresentercontactperson.$t.toLowerCase()).indexOf($scope.searchText.toLowerCase()) != -1 ||
                 (sub.gsx$title.$t.toLowerCase()).indexOf($scope.searchText.toLowerCase()) != -1 ||
