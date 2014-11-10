@@ -9,12 +9,15 @@
                 <input type="text" ng-model="searchText" placeholder="search by names or title">
             </label>
             <br>
-            <label ng-show="isAdmin()">
+            <label ng-show="isAnAdmin()">
                 Sort by review group
                 <select ng-model="reviewGroupFilterSelection">
                     <option ng-repeat="option in reviewGroupFilterOptions" ng-value="'{{option}}'">{{option}}</option>
                 </select>
             </label>
+            <br>
+            <button ng-show="isAnAdmin()" onclick="window.open('https://script.google.com/a/macros/morris.umn.edu/s/AKfycbx1_8tJUK2RLZ-eNHilExe01sXNWZ4jfuy7TTKMJlQ6VSaia0o/exec')">Assign Group</button>
+            You need to know the title of submission to assign groups.
         </li>
         <li class="list-group-item" ng-show="submissions.length < 1">
             <img class="centerImage" src="../../assets/images/hourglass-gif.gif">
