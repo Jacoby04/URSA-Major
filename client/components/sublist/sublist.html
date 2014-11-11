@@ -17,7 +17,7 @@
             </label>
             <br>
             <button ng-show="isAnAdmin()" onclick="window.open('https://script.google.com/a/macros/morris.umn.edu/s/AKfycbxG2WsEwuRdB2KCO0S_nFJf_rUYz0SGrp1BLjuyvESwZh7Z-fwh/exec')">Assign Group</button>
-            You need to know the title of submission to assign groups.
+            <span ng-show="isAnAdmin()">You need to know the title of submission to assign groups.</span>
         </li>
         <li class="list-group-item" ng-show="submissions.length < 1">
             <img class="centerImage" src="../../assets/images/hourglass-gif.gif">
